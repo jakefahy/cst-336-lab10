@@ -119,7 +119,7 @@ app.post('/login', function(req, res, next) {
         let successful = false;
         let message = '';
         console.log(req.body);
-        if(req.body.username === "hello" && req.body.password === "world") {
+        if(req.body.username === "admin" && req.body.password === "admin") {
             successful = true;
             req.session.username = req.body.username;
         } else {
