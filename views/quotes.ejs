@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Famous Quote Search </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+       
+    <script>
+    $(document).ready(function(){
+        
+            
+            $("a").on("click", function(){
+                //alert("test"); 
+                $.ajax({
+            
+                    method: "GET",
+                    url: "/authorInfo?=",
+                    dataType: "json",
+                    data: { "authorId": $(this).attr("id")},
+                    success: function(result,status) {
+                      //alert(result[0].firstName);
+                      $("#authorName").html(result[0].firstName + " " + result[0].lastName);
+                      $("#bio").html(result[0].biography);
+                      
+                      $('#authorModal').modal("show");
+                      $("#authorPic").attr("src", result[0].portrait);
+                      
+                    }
+            
+                });//ajax
+            })
+            
+          $("#returnButton").on("click",function(e){
+              window.location.href = "/";
+              
+          });  
+            
+    });
+    </script>
+    </head>
+    <body>
+        
+        <h1> Quotes Found:  </h1>
+        
+        &nbsp;
+        <button type="button" class="btn btn-primary" id="returnButton"> Return</button> <br><br>
+
+        <% records.forEach( function(record){ %> 
+        
+            <i><%= record.quote %></i> <br>
+            <a href="#"  id="<%= record.authorId %>">-<%= record.firstName %> <%= record.lastName %> </a>
+            <br><br>
+        <% })  %>
+        
+        
+       
+        
+
+
+<!-- Button trigger modal -->
+<!--<form action="/">-->
+<!--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="returnButton" >-->
+<!--  Return-->
+<!--  </button>-->
+  
+</form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="authorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><h1 id="authorName"></h1></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+         <div>
+            
+            <h1 id="authorName"></h1>
+            <p id="bio"></p>
+            
+            
+        </div>
+        
+        <img src="" id="authorPic" height="500" width="400">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </body>
+</html>

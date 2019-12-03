@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Author Adding </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+        <h1> Adding a New Author </h1>
+        
+
+        <form method="POST">
+        
+            First name: <input type="text" name="firstName"><br>    
+            Last  name: <input type="text" name="lastName"><br>    
+            Gender: <select name="gender">
+                <option value="">Select One</option>
+                <option value="F">Female</option>
+                <option value="M">Male</option>
+                <option value="O">Other</option>
+            </select>
+            <br>
+            Biography: <textarea name="biography" cols="50" height="20"></textarea>
+            <br><br>
+            <button class="btn btn-success">Add Author</button>
+        
+            <%= typeof(message) != "undefined"?message:"" %>
+            
+        </form>
+        
+        
+        <button id="goBack" class="btn btn-secondary">Cancel</button>
+
+        
+    </body>
+    
+    <script>
+        
+        $("#goBack").on("click",function(e){
+           window.location.href = "/admin" 
+        });
+        
+        
+    </script>
+</html>
